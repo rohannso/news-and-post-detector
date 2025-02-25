@@ -34,3 +34,7 @@ pip install -r requirements.txt
 Create a .env file in the project root and add:
 
 GROQ_API_KEY=gsk_your_api_key_here
+
+Running the App
+
+streamlit run app.py
