@@ -13,17 +13,16 @@ from langchain_groq import ChatGroq
 # Get API key from Streamlit secrets
 groq_api_key = st.secrets["groq"]["api_key"]
 
-# ✅ Configure Tesseract OCR
-pytesseract.pytesseract.tesseract_cmd = r"Tesseract-OCR\tesseract.exe"
-
 # ✅ Set Up Groq LLM
 llm = ChatGroq(api_key=groq_api_key, model_name="llama3-8b-8192")
 
 # ✅ Extract Text from Image (OCR)
+import easyocr
+
 def extract_text(image_path):
-    image = Image.open(image_path)
-    extracted_text = pytesseract.image_to_string(image)
-    return extracted_text.strip()
+    reader = easyocr.Reader(['en'])  # Set language to English
+    result = reader.readtext(image_path, detail=0)  # Extract text
+    return " ".join(result)
 
 # ✅ Fact-Check Using DuckDuckGo Search
 def search_fact_check(query):

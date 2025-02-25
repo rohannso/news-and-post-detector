@@ -10,3 +10,4 @@ langchain
 langchain_groq
 duckduckgo-search
 python-dotenv
+easyocr
