@@ -17,7 +17,7 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 
 # ✅ Groq API Key (Use environment variable for security)
 groq_api_key = os.getenv("GROQ_API_KEY")  
-llm = ChatGroq(api_key="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", model_name="llama3-8b-8192")
+llm = ChatGroq(api_key=groq_api_key, model_name="llama3-8b-8192")
 
 # ✅ OCR Extraction Agent
 def extract_text_from_image(image_path):

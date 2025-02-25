@@ -11,8 +11,11 @@ import time
 # ✅ Configure Tesseract OCR
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-# ✅ Set Up Groq LLM
-groq_api_key = "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"
+from dotenv import load_dotenv
+
+import os
+load_dotenv()
+groq_api_key = os.getenv("GROQ_API_KEY")
 llm = ChatGroq(api_key=groq_api_key, model_name="llama3-8b-8192")
 
 # ✅ 1. Extract Text from Image (OCR)

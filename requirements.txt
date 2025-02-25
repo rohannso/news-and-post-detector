@@ -1,0 +1,10 @@
+streamlit
+pytesseract
+opencv-python
+numpy
+Pillow
+requests
+langchain
+langchain_groq
+duckduckgo-search
+python-dotenv

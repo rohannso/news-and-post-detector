@@ -2,12 +2,14 @@ import streamlit as st
 from duckduckgo_search import DDGS
 from langchain_groq import ChatGroq
 from langchain.schema import HumanMessage
+from dotenv import load_dotenv
 
-# Groq API Key (Replace with your actual key)
-GROQ_API_KEY = "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"
+import os
+load_dotenv()
+groq_api_key = os.getenv("GROQ_API_KEY")
 
 # Initialize LangChain ChatGroq model
-llm = ChatGroq(model_name="mixtral-8x7b-32768", groq_api_key=GROQ_API_KEY)
+llm = ChatGroq(model_name="mixtral-8x7b-32768", groq_api_key=groq_api_key)
 
 # Function to search DuckDuckGo for related news articles
 def search_news(query, max_results=5):
