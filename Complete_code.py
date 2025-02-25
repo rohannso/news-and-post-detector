@@ -7,10 +7,11 @@ import time
 from duckduckgo_search import DDGS
 from langchain_groq import ChatGroq
 from langchain.schema import HumanMessage
-from dotenv import load_dotenv
-import os
-load_dotenv()
-groq_api_key = os.getenv("GROQ_API_KEY")
+import streamlit as st
+from langchain_groq import ChatGroq
+
+# Get API key from Streamlit secrets
+groq_api_key = st.secrets["groq"]["api_key"]
 
 # ✅ Configure Tesseract OCR
 pytesseract.pytesseract.tesseract_cmd = r"Tesseract-OCR\tesseract.exe"
