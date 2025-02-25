@@ -13,7 +13,7 @@ load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
 
 # ✅ Configure Tesseract OCR
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = r"Tesseract-OCR\tesseract.exe"
 
 # ✅ Set Up Groq LLM
 llm = ChatGroq(api_key=groq_api_key, model_name="llama3-8b-8192")
