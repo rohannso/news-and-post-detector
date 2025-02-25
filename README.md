@@ -37,4 +37,4 @@ GROQ_API_KEY=gsk_your_api_key_here
 
 Running the App
 
-streamlit run app.py
+streamlit run Complete_code.py
