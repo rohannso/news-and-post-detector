@@ -100,25 +100,25 @@ if option == "Post Detection":
 
         # Extracting text with a spinner
         with st.spinner("🔍 Extracting text from image..."):
-            time.sleep(2)  # Simulating delay
+            time.sleep(5)  # Simulating delay
             extracted_text = extract_text("uploaded_image.jpg")
         st.write(extracted_text)
 
         # Fact-checking with a spinner
         with st.spinner("🌐 Fact-checking with DuckDuckGo..."):
-            time.sleep(3)  # Simulating delay
+            time.sleep(5)  # Simulating delay
             fact_results = search_fact_check(extracted_text)
         st.write(fact_results)
 
         # AI Misinformation Analysis with a spinner
         with st.spinner("🧠 Analyzing misinformation..."):
-            time.sleep(2)  # Simulating delay
+            time.sleep(4)  # Simulating delay
             ai_analysis = analyze_misinformation(extracted_text)
         st.write(ai_analysis)
 
         # AI-Generated Image Detection with a spinner
         with st.spinner("🎭 Checking for AI-generated images..."):
-            time.sleep(2)  # Simulating delay
+            time.sleep(3)  # Simulating delay
             image_result = detect_ai_generated("uploaded_image.jpg")
         st.write(image_result)
 
@@ -135,7 +135,7 @@ elif option == "News Detection":
     if st.button("Authenticate"):
         if news_input.strip():
             with st.spinner("🔍 Searching for related news..."):
-                time.sleep(3)  # Simulating delay
+                time.sleep(5)  # Simulating delay
                 search_results = search_news(news_input)
 
             if not search_results:
@@ -146,7 +146,7 @@ elif option == "News Detection":
                     st.markdown(f"**{idx}. [{article['title']}]({article['href']})**")
 
                 with st.spinner("🤖 Analyzing with AI..."):
-                    time.sleep(2)  # Simulating delay
+                    time.sleep(4)  # Simulating delay
                     verification_result = verify_news(news_input, search_results)
 
                 st.subheader("📢 Fake News Detection Result:")
