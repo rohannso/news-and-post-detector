@@ -7,8 +7,7 @@ import time
 from duckduckgo_search import DDGS
 from langchain_groq import ChatGroq
 from langchain.schema import HumanMessage
-import streamlit as st
-from langchain_groq import ChatGroq
+import easyocr
 
 # Get API key from Streamlit secrets
 groq_api_key = st.secrets["groq"]["api_key"]
@@ -17,8 +16,6 @@ groq_api_key = st.secrets["groq"]["api_key"]
 llm = ChatGroq(api_key=groq_api_key, model_name="llama3-8b-8192")
 
 # ✅ Extract Text from Image (OCR)
-import easyocr
-
 def extract_text(image_path):
     reader = easyocr.Reader(['en'])  # Set language to English
     result = reader.readtext(image_path, detail=0)  # Extract text
@@ -28,7 +25,6 @@ def extract_text(image_path):
 def search_fact_check(query):
     search_results = []
     with DDGS() as ddgs:
-        time.sleep(3)
         results = ddgs.text(f"{query} site:snopes.com OR site:politifact.com OR site:reuters.com", max_results=5)
         for r in results:
             search_results.append(f"[{r['title']}]({r['href']})")
@@ -102,24 +98,35 @@ if option == "Post Detection":
         with open("uploaded_image.jpg", "wb") as f:
             f.write(uploaded_file.getbuffer())
 
-        st.subheader("🔍 Extracting Text from Image...")
-        extracted_text = extract_text("uploaded_image.jpg")
+        # Extracting text with a spinner
+        with st.spinner("🔍 Extracting text from image..."):
+            time.sleep(2)  # Simulating delay
+            extracted_text = extract_text("uploaded_image.jpg")
         st.write(extracted_text)
 
-        st.subheader("🌐 Fact-Checking with DuckDuckGo...")
-        fact_results = search_fact_check(extracted_text)
+        # Fact-checking with a spinner
+        with st.spinner("🌐 Fact-checking with DuckDuckGo..."):
+            time.sleep(3)  # Simulating delay
+            fact_results = search_fact_check(extracted_text)
         st.write(fact_results)
 
-        st.subheader("🧠 AI Misinformation Analysis:")
-        ai_analysis = analyze_misinformation(extracted_text)
+        # AI Misinformation Analysis with a spinner
+        with st.spinner("🧠 Analyzing misinformation..."):
+            time.sleep(2)  # Simulating delay
+            ai_analysis = analyze_misinformation(extracted_text)
         st.write(ai_analysis)
 
-        st.subheader("🎭 AI-Generated Image Detection:")
-        image_result = detect_ai_generated("uploaded_image.jpg")
+        # AI-Generated Image Detection with a spinner
+        with st.spinner("🎭 Checking for AI-generated images..."):
+            time.sleep(2)  # Simulating delay
+            image_result = detect_ai_generated("uploaded_image.jpg")
         st.write(image_result)
 
-        st.subheader("📊 Final Decision:")
-        final_decision = summarize_findings(ai_analysis, fact_results, image_result)
+        # Summarizing the findings with a spinner
+        with st.spinner("📊 Summarizing findings..."):
+            time.sleep(2)  # Simulating delay
+            final_decision = summarize_findings(ai_analysis, fact_results, image_result)
+        st.subheader("📢 Final Decision:")
         st.write(final_decision)
 
 elif option == "News Detection":
@@ -127,16 +134,21 @@ elif option == "News Detection":
     news_input = st.text_area("Paste the news content or claim:")
     if st.button("Authenticate"):
         if news_input.strip():
-            st.write("🔍 Searching for related news...")
-            search_results = search_news(news_input)
+            with st.spinner("🔍 Searching for related news..."):
+                time.sleep(3)  # Simulating delay
+                search_results = search_news(news_input)
+
             if not search_results:
                 st.error("❌ No relevant news found! Unable to verify.")
             else:
                 st.write("✅ Relevant news articles found:")
                 for idx, article in enumerate(search_results, 1):
                     st.markdown(f"**{idx}. [{article['title']}]({article['href']})**")
-                st.write("🤖 Analyzing with AI...")
-                verification_result = verify_news(news_input, search_results)
+
+                with st.spinner("🤖 Analyzing with AI..."):
+                    time.sleep(2)  # Simulating delay
+                    verification_result = verify_news(news_input, search_results)
+
                 st.subheader("📢 Fake News Detection Result:")
                 st.write(verification_result)
         else:
