@@ -390,8 +390,4 @@ elif option == "News Detection":
 st.sidebar.subheader("Supported Languages")
 st.sidebar.info(", ".join(language_options))
 
-st.sidebar.subheader("About")
-st.sidebar.info("""
-This tool uses multilingual OCR, translation, and regional fact-checking to detect misinformation across languages.
-Results can be provided in the original language of the content.
-""")
+
