@@ -12,3 +12,4 @@ duckduckgo-search
 python-dotenv
 easyocr
 deep_translator
+langdetect
